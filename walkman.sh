@@ -1,14 +1,13 @@
 #! /bin/bash
 
 source "walkman.conf"
+
 music_style=""
-song_counter=0
+song_counter=1
 song_cache=0
 
 function iterate_song() {
-
 	root_path=$1
-	echo "First Param : $root_path"
 
 	for iterator in `ls "$root_path"`; do
 		echo "Checking $root_path/$iterator"
@@ -19,8 +18,8 @@ function iterate_song() {
 			iterate_song "${root_path}/${iterator}"
 		else
 			echo "File : $iterator"
-			if [ "$iterator" == "*.mp3" ]; then
-			
+			echo "==================================="
+			if [[ "$iterator" == *.mp3 ]]; then
 				if [ $song_counter -gt $song_cache ]; then
 					play_song ${root_path}/${iterator}		
 				fi
